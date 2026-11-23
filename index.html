@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Paulo Vitor, 18 anos. Apaixonado por carros e viagens, com o sonho de ser CEO de uma empresa milionária.">
+    <meta name="theme-color" content="#17452F">
+    <title>Paulo Vitor | Apresentação Pessoal</title>
+
+    <style>
+        /* ===================================
+           CONFIGURAÇÕES GERAIS
+        =================================== */
+        :root {
+            --verde-escuro: #17452F;
+            --verde-medio: #26734B;
+            --verde-claro: #DDF2E3;
+            --verde-destaque: #42A66A;
+            --verde-neon: #7DE3A0;
+
+            --fundo: #F4F8F5;
+            --cartao: #FFFFFF;
+            --texto: #263B30;
+            --texto-secundario: #5B7064;
+            --borda: #DCE8DF;
+
+            --sombra-suave: 0 6px 24px rgba(23, 69, 47, 0.08);
+            --sombra-forte: 0 20px 45px rgba(23, 69, 47, 0.18);
+            --raio: 22px;
+        }
+
+        body.dark-theme {
+            --verde-escuro: #A4E6B9;
+            --verde-medio: #54B879;
+            --verde-claro: #1D3829;
+            --verde-destaque: #72D394;
+
+            --fundo: #0E1912;
+            --cartao: #172A1F;
+            --texto: #E8F3EA;
+            --texto-secundario: #B2C7B8;
+            --borda: #2B4535;
+
+            --sombra-suave: 0 6px 24px rgba(0, 0, 0, 0.35);
+            --sombra-forte: 0 20px 45px rgba(0, 0, 0, 0.5);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--fundo);
+            color: var(--texto);
+            font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        ::selection { background: var(--verde-destaque); color: #fff; }
+
+        section { scroll-margin-top: 70px; }
+
+        a { text-decoration: none; color: inherit; }
+
+        a:focus-visible, button:focus-visible, figure:focus-visible {
+            outline: 3px solid var(--verde-destaque);
+            outline-offset: 3px;
+        }
+
+        .container {
+            width: min(1120px, 92%);
+            margin: 0 auto;
+        }
+
+        /* Barra de progresso da rolagem */
+        .progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--verde-medio), var(--verde-neon));
+            z-index: 2000;
+        }
+
+
+        /* ===================================
+           MENU
+        =================================== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 0;
+            background: color-mix(in srgb, var(--cartao) 80%, transparent);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--borda);
+            transition: padding 0.3s, box-shadow 0.3s, background 0.3s;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--verde-escuro);
+        }
+
+        .logo span { color: var(--verde-destaque); }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .menu a {
+            position: relative;
+            display: block;
+            padding: 8px 14px;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 30px;
+            transition: color 0.3s, background 0.3s;
+        }
+
+        .menu a:hover { color: var(--verde-destaque); }
+
+        .menu a.active {
+            background: var(--verde-claro);
+            color: var(--verde-escuro);
+        }
+
+        .nav-actions { display: flex; align-items: center; gap: 10px; }
+
+        .theme-button, .menu-toggle {
+            border: 1px solid var(--borda);
+            background: var(--verde-claro);
+            color: var(--texto);
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 19px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .theme-button:hover { transform: rotate(20deg) scale(1.08); box-shadow: var(--sombra-suave); }
+
+        .menu-toggle { display: none; }
+
+
+        /* ===================================
+           INÍCIO
+        =================================== */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 130px 0 90px;
+            color: #fff;
+            background:
+                radial-gradient(circle at 85% 15%, rgba(125, 227, 160, 0.25), transparent 45%),
+                radial-gradient(circle at 5% 95%, rgba(66, 166, 106, 0.35), transparent 40%),
+                linear-gradient(135deg, #0E3022, #17452F 50%, #26734B);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(circle at 70% 50%, #000, transparent 75%);
+            -webkit-mask-image: radial-gradient(circle at 70% 50%, #000, transparent 75%);
+            pointer-events: none;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.22);
+            padding: 9px 18px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #DDF2E3;
+        }
+
+        .tag i {
+            width: 9px; height: 9px;
+            background: var(--verde-neon);
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(125,227,160,0.7);
+            animation: pulso 2s infinite;
+        }
+
+        @keyframes pulso {
+            70% { box-shadow: 0 0 0 12px rgba(125,227,160,0); }
+            100% { box-shadow: 0 0 0 0 rgba(125,227,160,0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6.5vw, 74px);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -1.5px;
+            margin: 26px 0 16px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #A8E9BD, #5ED58A);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .digitando {
+            font-size: clamp(18px, 2.4vw, 26px);
+            font-weight: 600;
+            color: #DDF2E3;
+            min-height: 38px;
+        }
+
+        .digitando .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.1em;
+            margin-left: 4px;
+            vertical-align: -3px;
+            background: var(--verde-neon);
+            animation: piscar 0.8s steps(1) infinite;
+        }
+
+        @keyframes piscar { 50% { opacity: 0; } }
+
+        .hero p.descricao {
+            max-width: 560px;
+            color: #E1F0E5;
+            font-size: 17px;
+            line-height: 1.85;
+            margin: 20px 0 34px;
+        }
+
+        .botoes { display: flex; flex-wrap: wrap; gap: 14px; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        }
+
+        .btn-claro {
+            background: #DDF2E3;
+            color: #17452F;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+        }
+
+        .btn-claro:hover { background: #fff; transform: translateY(-4px); box-shadow: 0 16px 30px rgba(0,0,0,0.28); }
+
+        .btn-contorno {
+            border-color: rgba(255,255,255,0.5);
+            color: #fff;
+        }
+
+        .btn-contorno:hover { background: rgba(255,255,255,0.12); transform: translateY(-4px); }
+
+        /* Foto com órbita */
+        .hero-visual { display: flex; justify-content: center; }
+
+        .orbita {
+            position: relative;
+            width: min(340px, 78vw);
+            aspect-ratio: 1;
+            display: grid;
+            place-items: center;
+        }
+
+        .orbita::before, .orbita::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            border: 2px dashed rgba(255,255,255,0.25);
+        }
+
+        .orbita::before { inset: 0; animation: girar 30s linear infinite; }
+        .orbita::after  { inset: 32px; animation: girar 22s linear infinite reverse; }
+
+        @keyframes girar { to { transform: rotate(360deg); } }
+
+        /* ===== FOTO DO TOPO (redonda) ===== */
+        .avatar {
+            position: relative;
+            overflow: hidden;
+            width: 62%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: clamp(54px, 9vw, 86px);
+            font-weight: 800;
+            color: #17452F;
+            background: linear-gradient(145deg, #F0FBF4, #B9E4C8);
+            border: 8px solid rgba(255,255,255,0.28);
+            box-shadow: 0 0 0 14px rgba(255,255,255,0.07), 0 28px 55px rgba(0,0,0,0.35);
+            z-index: 2;
+        }
+
+        .icone-flutuante {
+            position: absolute;
+            width: 58px; height: 58px;
+            display: grid;
+            place-items: center;
+            font-size: 28px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+            z-index: 3;
+            animation: flutuar 4s ease-in-out infinite;
+        }
+
+        .icone-flutuante:nth-of-type(1) { top: 4%;  left: 6%; }
+        .icone-flutuante:nth-of-type(2) { top: 14%; right: -2%; animation-delay: -1.3s; }
+        .icone-flutuante:nth-of-type(3) { bottom: 6%; left: 12%; animation-delay: -2.6s; }
+
+        @keyframes flutuar {
+            0%, 100% { transform: translateY(0) rotate(-4deg); }
+            50%      { transform: translateY(-14px) rotate(4deg); }
+        }
+
+        .rolar {
+            position: absolute;
+            bottom: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 26px; height: 42px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 20px;
+            z-index: 2;
+        }
+
+        .rolar::after {
+            content: "";
+            position: absolute;
+            top: 8px; left: 50%;
+            width: 4px; height: 8px;
+            margin-left: -2px;
+            background: #fff;
+            border-radius: 4px;
+            animation: rolagem 1.6s infinite;
+        }
+
+        @keyframes rolagem {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(14px); }
+        }
+
+
+        /* ===================================
+           FAIXA DE ROLAGEM
+        =================================== */
+        .faixa {
+            background: var(--verde-escuro);
+            color: var(--fundo);
+            overflow: hidden;
+            padding: 16px 0;
+            white-space: nowrap;
+        }
+
+        body.dark-theme .faixa { background: var(--verde-claro); color: var(--verde-escuro); }
+
+        .faixa-trilho {
+            display: inline-flex;
+            gap: 46px;
+            padding-right: 46px;
+            animation: marquee 28s linear infinite;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 15px;
+        }
+
+        @keyframes marquee { to { transform: translateX(-50%); } }
+
+
+        /* ===================================
+           SEÇÕES
+        =================================== */
+        .section { padding: 110px 0; }
+
+        .section-title { text-align: center; margin-bottom: 60px; }
+
+        .section-title span {
+            color: var(--verde-destaque);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .section-title h2 {
+            position: relative;
+            color: var(--verde-escuro);
+            font-size: clamp(30px, 4.5vw, 44px);
+            font-weight: 800;
+            margin-top: 10px;
+            padding-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            left: 50%; bottom: 0;
+            transform: translateX(-50%);
+            width: 64px; height: 5px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, var(--verde-medio), var(--verde-destaque));
+        }
+
+        .section-title p { color: var(--texto-secundario); margin-top: 14px; }
+
+
+        /* ===================================
+           SOBRE MIM
+        =================================== */
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            align-items: center;
+            gap: 70px;
+        }
+
+        .sobre-foto { display: flex; justify-content: center; }
+
+        /* ===== FOTO DO "SOBRE MIM" (quadrada com cantos arredondados) ===== */
+        .sobre-avatar {
+            position: relative;
+            width: min(300px, 80vw);
+            aspect-ratio: 1;
+            border-radius: 32px;
+            display: grid;
+            place-items: center;
+            font-size: 90px;
+            font-weight: 800;
+            color: #fff;
+            background: linear-gradient(135deg, #17452F, #42A66A);
+            box-shadow: 18px 18px 0 var(--verde-claro), var(--sombra-forte);
+            transition: transform 0.4s;
+        }
+
+        .sobre-avatar:hover { transform: rotate(-3deg) scale(1.03); }
+
+        .sobre-avatar small {
+            position: absolute;
+            bottom: -18px;
+            right: -10px;
+            z-index: 2;
+            background: var(--cartao);
+            color: var(--verde-escuro);
+            font-size: 14px;
+            font-weight: 700;
+            padding: 10px 18px;
+            border-radius: 40px;
+            border: 1px solid var(--borda);
+            box-shadow: var(--sombra-suave);
+        }
+
+        /* ===== ESTILO DAS FOTOS DO PERFIL ===== */
+        .avatar img,
+        .sobre-avatar img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: inherit;
+            display: block;
+        }
+
+        .sobre-texto h3 {
+            color: var(--verde-escuro);
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .sobre-texto p { color: var(--texto-secundario); margin-bottom: 14px; line-height: 1.9; }
+
+        .estatisticas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 30px;
+        }
+
+        .estat {
+            background: var(--cartao);
+            border: 1px solid var(--borda);
+            border-radius: 18px;
+            padding: 20px 14px;
+            text-align: center;
+            box-shadow: var(--sombra-suave);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .estat:hover { transform: translateY(-6px); border-color: var(--verde-destaque); }
+
+        .estat strong {
+            display: block;
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--verde-medio), var(--verde-destaque));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .estat span { font-size: 13px; color: var(--texto-secundario); font-weight: 600; }
+
+
+        /* ===================================
+           HOBBIES (com fotos)
+        =================================== */
+        .hobbies {
+            background:
+                radial-gradient(circle at 92% 8%, rgba(66,166,106,0.14), transparent 40%),
+                var(--verde-claro);
+        }
+
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            align-items: start;
+        }
+
+        .hobby-card {
+            position: relative;
+            overflow: hidden;
+            padding: 46px 38px;
+            border-radius: 28px;
+            color: #fff;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            box-shadow: var(--sombra-forte);
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+
+        .hobby-card:hover { transform: translateY(-8px); }
+
+        .hobby-carro  { background: linear-gradient(160deg, #0E3022 0%, #1F6B45 100%); }
+        .hobby-viagem { background: linear-gradient(160deg, #17452F 0%, #42A66A 100%); }
+
+        /* Emoji gigante de fundo (some quando existe foto de capa) */
+        .hobby-card::before {
+            content: attr(data-emoji);
+            position: absolute;
+            top: -10px; right: -10px;
+            font-size: 190px;
+            opacity: 0.16;
+            line-height: 1;
+            transition: transform 0.6s;
+        }
+
+        .hobby-card:hover::before { transform: scale(1.15) rotate(-8deg); }
+
+        .hobby-card:has(.capa)::before { display: none; }
+
+        /* ===== FOTO DE CAPA DO CARD ===== */
+        .hobby-card .capa {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s;
+        }
+
+        .hobby-card:hover .capa { transform: scale(1.08); }
+
+        /* Película verde escura por cima, para o texto ficar legível */
+        .hobby-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 0%, rgba(255,255,255,0.12), transparent 50%),
+                linear-gradient(to top, rgba(8, 32, 22, 0.92) 8%, rgba(8, 32, 22, 0.45) 60%, rgba(8, 32, 22, 0.15) 100%);
+            pointer-events: none;
+        }
+
+        .hobby-icone {
+            position: relative;
+            z-index: 1;
+            width: 76px; height: 76px;
+            display: grid;
+            place-items: center;
+            font-size: 40px;
+            background: rgba(255,255,255,0.16);
+            border: 1px solid rgba(255,255,255,0.28);
+            border-radius: 22px;
+            margin-bottom: 22px;
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+        }
+
+        .hobby-card h3 { position: relative; z-index: 1; font-size: 30px; font-weight: 800; margin-bottom: 12px; }
+
+        .hobby-card p { position: relative; z-index: 1; color: #E3F4E8; line-height: 1.8; margin-bottom: 20px; }
+
+        .chips { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 10px; }
+
+        .chips li {
+            list-style: none;
+            background: rgba(255,255,255,0.16);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 7px 15px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 30px;
+        }
+
+        /* ===== GALERIA DE FOTOS ===== */
+        .galeria-titulo {
+            margin: 26px 0 12px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--verde-escuro);
+        }
+
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .foto {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+            border-radius: 18px;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--verde-medio), var(--verde-destaque));
+            box-shadow: var(--sombra-suave);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        /* Quadrinho de reserva (aparece se a foto não existir) */
+        .foto::before {
+            content: attr(data-emoji);
+            font-size: 38px;
+            opacity: 0.55;
+        }
+
+        .foto img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .foto:hover { transform: translateY(-6px); box-shadow: var(--sombra-forte); }
+        .foto:hover img { transform: scale(1.12); }
+
+        /* Lupa ao passar o mouse */
+        .foto::after {
+            content: "🔍";
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            font-size: 26px;
+            background: rgba(8, 32, 22, 0.45);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .foto:hover::after { opacity: 1; }
+
+        /* ===== TELA CHEIA (LIGHTBOX) ===== */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: rgba(5, 20, 13, 0.92);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .lightbox.aberto { opacity: 1; visibility: visible; }
+
+        .lightbox img {
+            max-width: min(1000px, 94vw);
+            max-height: 86vh;
+            border-radius: 18px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            transform: scale(0.94);
+            transition: transform 0.3s;
+        }
+
+        .lightbox.aberto img { transform: scale(1); }
+
+        .lightbox-fechar {
+            position: absolute;
+            top: 20px; right: 22px;
+            width: 46px; height: 46px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.16);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .lightbox-fechar:hover { background: var(--verde-destaque); transform: rotate(90deg); }
+
+
+        /* ===================================
+           OBJETIVOS
+        =================================== */
+        .objetivos-wrap { max-width: 860px; margin: 0 auto; }
+
+        .trilha { position: relative; padding-left: 10px; }
+
+        .trilha::before {
+            content: "";
+            position: absolute;
+            left: 37px; top: 20px; bottom: 20px;
+            width: 3px;
+            background: linear-gradient(var(--verde-destaque), var(--borda));
+            border-radius: 3px;
+        }
+
+        .objetivo {
+            position: relative;
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
+            padding: 26px 28px;
+            margin-bottom: 20px;
+            background: var(--cartao);
+            border: 1px solid var(--borda);
+            border-radius: var(--raio);
+            box-shadow: var(--sombra-suave);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+
+        .objetivo:hover { transform: translateX(8px); box-shadow: var(--sombra-forte); border-color: var(--verde-destaque); }
+
+        .objetivo .numero {
+            flex-shrink: 0;
+            width: 56px; height: 56px;
+            display: grid;
+            place-items: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--verde-medio), var(--verde-destaque));
+            box-shadow: 0 8px 18px rgba(38,115,75,0.32);
+            z-index: 1;
+        }
+
+        .objetivo h3 { color: var(--verde-escuro); font-size: 22px; font-weight: 800; }
+
+        .objetivo p { color: var(--texto-secundario); margin-top: 8px; line-height: 1.75; }
+
+        .objetivo.principal {
+            color: #fff;
+            border: none;
+            background:
+                radial-gradient(circle at 100% 0%, rgba(125,227,160,0.3), transparent 50%),
+                linear-gradient(135deg, #0E3022, #26734B);
+        }
+
+        .objetivo.principal h3 { color: #fff; font-size: 26px; }
+        .objetivo.principal p { color: #DDF2E3; }
+        .objetivo.principal .numero { background: #DDF2E3; color: #17452F; box-shadow: 0 8px 18px rgba(0,0,0,0.3); }
+
+        .selo {
+            display: inline-block;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+
+        /* ===================================
+           FRASE FINAL
+        =================================== */
+        .frase {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: #fff;
+            padding: 100px 0;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(125,227,160,0.25), transparent 45%),
+                linear-gradient(135deg, #0E3022, #17452F 55%, #26734B);
+        }
+
+        .frase blockquote {
+            font-size: clamp(26px, 4.5vw, 46px);
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -1px;
+            max-width: 850px;
+            margin: 0 auto 34px;
+        }
+
+        .frase blockquote em {
+            font-style: normal;
+            background: linear-gradient(90deg, #A8E9BD, #5ED58A);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        /* ===================================
+           RODAPÉ
+        =================================== */
+        footer {
+            background: #0A261A;
+            color: #fff;
+            text-align: center;
+            padding: 50px 0;
+            border-top: 4px solid var(--verde-destaque);
+        }
+
+        footer h3 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+        footer h3 span { color: var(--verde-destaque); }
+        footer p { color: #DDF2E3; }
+        footer small { display: block; margin-top: 14px; color: #9CC4AA; }
+
+        .topo {
+            position: fixed;
+            right: 22px; bottom: 22px;
+            width: 50px; height: 50px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--verde-medio), var(--verde-destaque));
+            box-shadow: 0 10px 24px rgba(23,69,47,0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 900;
+        }
+
+        .topo.visivel { opacity: 1; visibility: visible; transform: translateY(0); }
+        .topo:hover { transform: translateY(-4px); }
+
+
+        /* ===================================
+           ANIMAÇÃO AO ROLAR
+        =================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.show { opacity: 1; transform: translateY(0); }
+
+        .d1 { transition-delay: 0.12s; }
+        .d2 { transition-delay: 0.24s; }
+        .d3 { transition-delay: 0.36s; }
+
+
+        /* ===================================
+           CELULAR E TABLET
+        =================================== */
+        @media (max-width: 900px) {
+
+            .menu-toggle { display: flex; }
+
+            .menu {
+                position: absolute;
+                top: 100%; left: 0;
+                width: 100%;
+                flex-direction: column;
+                gap: 4px;
+                padding: 16px 4%;
+                background: var(--cartao);
+                border-bottom: 1px solid var(--borda);
+                box-shadow: var(--sombra-suave);
+                clip-path: inset(0 0 100% 0);
+                visibility: hidden;
+                transition: clip-path 0.4s, visibility 0.4s;
+            }
+
+            .menu.aberto { clip-path: inset(0 0 0 0); visibility: visible; }
+
+            .menu a { text-align: center; padding: 12px; }
+
+            .hero { text-align: center; padding-top: 120px; }
+            .hero .container { grid-template-columns: 1fr; gap: 40px; }
+            .hero p.descricao { margin-left: auto; margin-right: auto; }
+            .botoes { justify-content: center; }
+            .hero-visual { order: -1; }
+
+            .sobre-grid { grid-template-columns: 1fr; gap: 50px; text-align: center; }
+
+            .hobbies-grid { grid-template-columns: 1fr; gap: 50px; }
+
+            .section { padding: 80px 0; }
+        }
+
+        @media (max-width: 560px) {
+            .estatisticas { grid-template-columns: 1fr; }
+            .hobby-card { padding: 34px 26px; min-height: 380px; }
+            .objetivo { flex-direction: column; gap: 16px; padding: 24px 20px; }
+            .trilha::before { display: none; }
+            .rolar { display: none; }
+            .galeria { gap: 8px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+
+    <!-- Se uma foto não carregar, tenta outras extensões antes de desistir -->
+    <script>
+        window.addEventListener("error", function (e) {
+            const img = e.target;
+            if (!(img instanceof HTMLImageElement)) return;
+
+            const extensoes = ["jpeg", "jpg", "png", "webp", "JPEG", "JPG", "PNG"];
+            const atual = img.getAttribute("src");
+            const base = atual.replace(/\.[^./]+$/, "");
+
+            let tentativa = Number(img.dataset.tentativa || 0);
+            let novo = null;
+
+            while (tentativa < extensoes.length) {
+                const candidato = base + "." + extensoes[tentativa++];
+                if (candidato !== atual) { novo = candidato; break; }
+            }
+
+            if (novo) {
+                e.stopImmediatePropagation(); // impede o onerror de remover a foto
+                img.dataset.tentativa = tentativa;
+                img.src = novo;
+            }
+        }, true);
+    </script>
+</head>
+
+<body>
+
+<div class="progress-bar" id="progresso"></div>
+
+<!-- MENU -->
+<nav class="navbar" id="navbar">
+    <div class="container">
+
+        <a href="#inicio" class="logo">Paulo Vitor<span>.</span></a>
+
+        <ul class="menu" id="menu">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre mim</a></li>
+            <li><a href="#hobbies">Hobbies</a></li>
+            <li><a href="#objetivos">Objetivos</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <button id="themeButton" class="theme-button" aria-label="Alternar tema">☀️</button>
+            <button id="menuToggle" class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">☰</button>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- INÍCIO -->
+<header id="inicio" class="hero">
+    <div class="container">
+
+        <div class="hero-texto reveal">
+            <span class="tag"><i></i> APRESENTAÇÃO PESSOAL</span>
+
+            <h1>Olá, eu sou <br><span>Paulo Vitor!</span></h1>
+
+            <div class="digitando">
+                <span id="digitando"></span><span class="cursor"></span>
+            </div>
+
+            <p class="descricao">
+                Tenho 18 anos, adoro carros e viajar, e estou construindo
+                meu caminho para um dia ser CEO de uma empresa milionária.
+            </p>
+
+            <div class="botoes">
+                <a href="#sobre" class="btn btn-claro">Conheça minha história →</a>
+                <a href="#objetivos" class="btn btn-contorno">Meus objetivos</a>
+            </div>
+        </div>
+
+        <div class="hero-visual reveal d2">
+            <div class="orbita">
+                <div class="icone-flutuante">🚗</div>
+                <div class="icone-flutuante">✈️</div>
+                <div class="icone-flutuante">🚀</div>
+
+                <!-- ✅ FOTO 1 (topo): img/foto1.jpeg -->
+                <div class="avatar">
+                    PV
+                    <img src="img/foto1.jpeg" alt="Foto de Paulo Vitor" onerror="this.remove()">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="rolar" aria-hidden="true"></div>
+</header>
+
+
+<!-- FAIXA -->
+<div class="faixa" aria-hidden="true">
+    <div class="faixa-trilho">
+        <span>🚗 EVENTOS DE CARRO</span><span>✈️ VIAJAR</span><span>🚀 FUTURO CEO</span><span>💼 EMPRESA MILIONÁRIA</span>
+        <span>🚗 EVENTOS DE CARRO</span><span>✈️ VIAJAR</span><span>🚀 FUTURO CEO</span><span>💼 EMPRESA MILIONÁRIA</span>
+        <span>🚗 EVENTOS DE CARRO</span><span>✈️ VIAJAR</span><span>🚀 FUTURO CEO</span><span>💼 EMPRESA MILIONÁRIA</span>
+        <span>🚗 EVENTOS DE CARRO</span><span>✈️ VIAJAR</span><span>🚀 FUTURO CEO</span><span>💼 EMPRESA MILIONÁRIA</span>
+    </div>
+</div>
+
+
+<!-- SOBRE MIM -->
+<section id="sobre" class="section">
+    <div class="container">
+
+        <div class="section-title reveal">
+            <span>QUEM SOU EU</span>
+            <h2>Sobre mim</h2>
+        </div>
+
+        <div class="sobre-grid">
+
+            <div class="sobre-foto reveal">
+
+                <!-- ✅ FOTO 2 (sobre mim): img/foto2.jpeg -->
+                <div class="sobre-avatar">
+                    PV
+                    <img src="img/foto2.jpeg" alt="Foto de Paulo Vitor" onerror="this.remove()">
+                    <small>👋 Prazer!</small>
+                </div>
+
+            </div>
+
+            <div class="sobre-texto reveal d2">
+                <h3>Prazer, sou Paulo Vitor!</h3>
+
+                <p>
+                    Tenho 18 anos e sou uma pessoa que busca crescer, aprender
+                    e conquistar meus objetivos. Acredito que cada experiência
+                    é uma oportunidade de adquirir novos conhecimentos e evoluir.
+                </p>
+
+                <p>
+                    Nas horas livres, gosto de ir a eventos de carro e de viajar,
+                    conhecer lugares novos e pessoas que compartilham das mesmas
+                    paixões. Ao mesmo tempo, tenho um grande sonho: ser CEO de
+                    uma empresa milionária.
+                </p>
+
+                <p>
+                    Meu objetivo é sempre dar o meu melhor, aprender com os
+                    desafios e evoluir tanto profissionalmente quanto pessoalmente.
+                </p>
+
+                <div class="estatisticas">
+                    <div class="estat">
+                        <strong data-alvo="18">0</strong>
+                        <span>anos de história</span>
+                    </div>
+                    <div class="estat">
+                        <strong data-alvo="2">0</strong>
+                        <span>grandes paixões</span>
+                    </div>
+                    <div class="estat">
+                        <strong data-alvo="1">0</strong>
+                        <span>sonho: ser CEO</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- HOBBIES -->
+<section id="hobbies" class="section hobbies">
+    <div class="container">
+
+        <div class="section-title reveal">
+            <span>O QUE EU AMO FAZER</span>
+            <h2>Meus hobbies</h2>
+            <p>As paixões que fazem meu tempo livre valer a pena. Clique nas fotos para ampliar!</p>
+        </div>
+
+        <div class="hobbies-grid">
+
+            <!-- ===== EVENTOS DE CARRO ===== -->
+            <div class="reveal">
+
+                <article class="hobby-card hobby-carro" data-emoji="🚗">
+
+                    <!-- ✅ FOTO DE CAPA: img/carro1.jpeg -->
+                    <img class="capa" src="img/carro1.jpeg" alt="Evento de carro" onerror="this.remove()">
+
+                    <div class="hobby-icone">🚗</div>
+                    <h3>Eventos de carro</h3>
+                    <p>
+                        Ir a eventos de carro é um dos meus maiores prazeres:
+                        ver máquinas incríveis de perto, admirar cada detalhe
+                        e conhecer pessoas que vivem a mesma paixão.
+                    </p>
+                    <ul class="chips">
+                        <li>🏁 Máquinas incríveis</li>
+                        <li>🤝 Novas amizades</li>
+                        <li>🔥 Muita paixão</li>
+                    </ul>
+                </article>
+
+                <p class="galeria-titulo">📸 FOTOS DOS EVENTOS</p>
+
+                <!-- ✅ GALERIA: img/carro2.jpeg, carro3.jpeg, carro4.jpeg -->
+                <div class="galeria">
+                    <figure class="foto" data-emoji="🚗" tabindex="0" role="button" aria-label="Ampliar foto do evento de carro 1">
+                        <img src="img/carro2.jpeg" alt="Foto de evento de carro 1" loading="lazy" onerror="this.remove()">
+                    </figure>
+                    <figure class="foto" data-emoji="🏁" tabindex="0" role="button" aria-label="Ampliar foto do evento de carro 2">
+                        <img src="img/carro3.jpeg" alt="Foto de evento de carro 2" loading="lazy" onerror="this.remove()">
+                    </figure>
+                    <figure class="foto" data-emoji="🔥" tabindex="0" role="button" aria-label="Ampliar foto do evento de carro 3">
+                        <img src="img/carro4.jpeg" alt="Foto de evento de carro 3" loading="lazy" onerror="this.remove()">
+                    </figure>
+                </div>
+
+            </div>
+
+            <!-- ===== VIAJAR ===== -->
+            <div class="reveal d2">
+
+                <article class="hobby-card hobby-viagem" data-emoji="✈️">
+
+                    <!-- ✅ FOTO DE CAPA: img/viagem1.jpeg -->
+                    <img class="capa" src="img/viagem1.jpeg" alt="Viagem" onerror="this.remove()">
+
+                    <div class="hobby-icone">✈️</div>
+                    <h3>Viajar</h3>
+                    <p>
+                        Viajar me permite conhecer novos lugares, culturas e
+                        histórias. Cada destino é uma experiência que fica
+                        para sempre e abre a mente para novas ideias.
+                    </p>
+                    <ul class="chips">
+                        <li>🌍 Novos lugares</li>
+                        <li>📸 Memórias</li>
+                        <li>🧭 Aventura</li>
+                    </ul>
+                </article>
+
+                <p class="galeria-titulo">📸 FOTOS DAS VIAGENS</p>
+
+                <!-- ✅ GALERIA: img/viagem2.jpeg, viagem3.jpeg, viagem4.jpeg -->
+                <div class="galeria">
+                    <figure class="foto" data-emoji="🌍" tabindex="0" role="button" aria-label="Ampliar foto de viagem 1">
+                        <img src="img/viagem2.jpeg" alt="Foto de viagem 1" loading="lazy" onerror="this.remove()">
+                    </figure>
+                    <figure class="foto" data-emoji="📸" tabindex="0" role="button" aria-label="Ampliar foto de viagem 2">
+                        <img src="img/viagem3.jpeg" alt="Foto de viagem 2" loading="lazy" onerror="this.remove()">
+                    </figure>
+                    <figure class="foto" data-emoji="🧭" tabindex="0" role="button" aria-label="Ampliar foto de viagem 3">
+                        <img src="img/viagem4.jpeg" alt="Foto de viagem 3" loading="lazy" onerror="this.remove()">
+                    </figure>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- OBJETIVOS -->
+<section id="objetivos" class="section">
+    <div class="container">
+
+        <div class="section-title reveal">
+            <span>MEU FUTURO</span>
+            <h2>Meus objetivos</h2>
+            <p>O caminho que eu quero percorrer.</p>
+        </div>
+
+        <div class="objetivos-wrap">
+            <div class="trilha">
+
+                <div class="objetivo principal reveal">
+                    <div class="numero">01</div>
+                    <div>
+                        <span class="selo">GRANDE SONHO</span>
+                        <h3>Ser CEO de uma empresa milionária</h3>
+                        <p>
+                            Construir uma carreira sólida, liderar com
+                            responsabilidade e chegar ao cargo de CEO de
+                            uma empresa milionária.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="objetivo reveal d1">
+                    <div class="numero">02</div>
+                    <div>
+                        <h3>Novos conhecimentos</h3>
+                        <p>
+                            Aprender constantemente e desenvolver novas
+                            habilidades para crescer a cada dia.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="objetivo reveal d2">
+                    <div class="numero">03</div>
+                    <div>
+                        <h3>Conquistas pessoais</h3>
+                        <p>
+                            Alcançar minha independência e transformar
+                            meus sonhos em realidade.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- FRASE FINAL -->
+<section class="frase">
+    <div class="container reveal">
+        <blockquote>
+            Hoje eu curto carros e viagens. Amanhã, <em>CEO de uma empresa milionária.</em>
+        </blockquote>
+        <a href="#inicio" class="btn btn-claro">Voltar ao início ↑</a>
+    </div>
+</section>
+
+
+<!-- RODAPÉ -->
+<footer>
+    <div class="container">
+        <h3>Paulo Vitor<span>.</span></h3>
+        <p>Obrigado por conhecer um pouco da minha história!</p>
+        <small>©️ 2026 Paulo Vitor - Todos os direitos reservados.</small>
+    </div>
+</footer>
+
+<button class="topo" id="topo" aria-label="Voltar ao topo">↑</button>
+
+<!-- TELA CHEIA DAS FOTOS -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-fechar" id="lightboxFechar" aria-label="Fechar foto">✕</button>
+    <img id="lightboxImg" src="" alt="">
+</div>
+
+
+<script>
+    // ===================================
+    // 1. MODO CLARO E ESCURO
+    // ===================================
+    const botaoTema = document.getElementById("themeButton");
+
+    function lerTema() {
+        try { return localStorage.getItem("tema"); } catch (e) { return null; }
+    }
+
+    function salvarTema(valor) {
+        try { localStorage.setItem("tema", valor); } catch (e) {}
+    }
+
+    function atualizarBotaoTema() {
+        const escuro = document.body.classList.contains("dark-theme");
+        botaoTema.textContent = escuro ? "🌙" : "☀️";
+        botaoTema.setAttribute("aria-pressed", String(escuro));
+        botaoTema.setAttribute("aria-label", escuro ? "Ativar tema claro" : "Ativar tema escuro");
+    }
+
+    const temaSalvo = lerTema();
+    const aparelhoEscuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (temaSalvo === "escuro" || (!temaSalvo && aparelhoEscuro)) {
+        document.body.classList.add("dark-theme");
+    }
+
+    atualizarBotaoTema();
+
+    botaoTema.addEventListener("click", function () {
+        document.body.classList.toggle("dark-theme");
+        salvarTema(document.body.classList.contains("dark-theme") ? "escuro" : "claro");
+        atualizarBotaoTema();
+    });
+
+
+    // ===================================
+    // 2. MENU NO CELULAR
+    // ===================================
+    const menu = document.getElementById("menu");
+    const botaoMenu = document.getElementById("menuToggle");
+    const linksMenu = document.querySelectorAll(".menu a");
+
+    function alternarMenu(abrir) {
+        const aberto = typeof abrir === "boolean" ? abrir : !menu.classList.contains("aberto");
+        menu.classList.toggle("aberto", aberto);
+        botaoMenu.setAttribute("aria-expanded", String(aberto));
+        botaoMenu.textContent = aberto ? "✕" : "☰";
+    }
+
+    botaoMenu.addEventListener("click", function () { alternarMenu(); });
+
+    linksMenu.forEach(function (link) {
+        link.addEventListener("click", function () { alternarMenu(false); });
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") alternarMenu(false);
+    });
+
+
+    // ===================================
+    // 3. EFEITO DE DIGITAÇÃO
+    // ===================================
+    const alvoDigitacao = document.getElementById("digitando");
+    const frases = [
+        "Apaixonado por carros 🚗",
+        "Amante de viagens ✈️",
+        "Futuro CEO 🚀"
+    ];
+
+    const menosAnimacao = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (menosAnimacao) {
+        alvoDigitacao.textContent = frases.join(" • ");
+    } else {
+        let fraseAtual = 0;
+        let letra = 0;
+        let apagando = false;
+
+        function digitar() {
+            const frase = frases[fraseAtual];
+
+            alvoDigitacao.textContent = frase.slice(0, letra);
+            letra += apagando ? -1 : 1;
+
+            let espera = apagando ? 35 : 80;
+
+            if (!apagando && letra > frase.length) {
+                apagando = true;
+                espera = 1600;
+            } else if (apagando && letra < 0) {
+                apagando = false;
+                letra = 0;
+                fraseAtual = (fraseAtual + 1) % frases.length;
+                espera = 400;
+            }
+
+            setTimeout(digitar, espera);
+        }
+
+        digitar();
+    }
+
+
+    // ===================================
+    // 4. ANIMAÇÕES AO ROLAR + CONTADORES
+    // ===================================
+    const elementosReveal = document.querySelectorAll(".reveal");
+    const contadores = document.querySelectorAll("[data-alvo]");
+
+    function animarContador(el) {
+        const alvo = Number(el.dataset.alvo);
+
+        if (menosAnimacao) { el.textContent = alvo; return; }
+
+        const duracao = 1400;
+        const inicio = performance.now();
+
+        function passo(agora) {
+            const progresso = Math.min((agora - inicio) / duracao, 1);
+            const suave = 1 - Math.pow(1 - progresso, 3);
+            el.textContent = Math.round(alvo * suave);
+            if (progresso < 1) requestAnimationFrame(passo);
+        }
+
+        requestAnimationFrame(passo);
+    }
+
+    if (menosAnimacao || !("IntersectionObserver" in window)) {
+
+        elementosReveal.forEach(function (el) { el.classList.add("show"); });
+        contadores.forEach(function (el) { el.textContent = el.dataset.alvo; });
+
+    } else {
+
+        const observador = new IntersectionObserver(function (entradas) {
+            entradas.forEach(function (entrada) {
+                if (!entrada.isIntersecting) return;
+
+                entrada.target.classList.add("show");
+
+                entrada.target.querySelectorAll("[data-alvo]").forEach(animarContador);
+
+                observador.unobserve(entrada.target);
+            });
+        }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+
+        elementosReveal.forEach(function (el) { observador.observe(el); });
+    }
+
+
+    // ===================================
+    // 5. ROLAGEM: PROGRESSO, MENU ATIVO E BOTÃO DE TOPO
+    // ===================================
+    const barraProgresso = document.getElementById("progresso");
+    const navbar = document.getElementById("navbar");
+    const botaoTopo = document.getElementById("topo");
+    const secoes = document.querySelectorAll("section[id], header[id]");
+    let aguardando = false;
+
+    function aoRolar() {
+        aguardando = false;
+
+        const rolado = window.scrollY;
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+
+        barraProgresso.style.width = (total > 0 ? (rolado / total) * 100 : 0) + "%";
+
+        navbar.classList.toggle("scrolled", rolado > 40);
+        botaoTopo.classList.toggle("visivel", rolado > 500);
+
+        let atual = "";
+
+        secoes.forEach(function (secao) {
+            if (rolado >= secao.offsetTop - 160) atual = secao.id;
+        });
+
+        if (window.innerHeight + rolado >= document.body.offsetHeight - 5) {
+            atual = "objetivos";
+        }
+
+        linksMenu.forEach(function (link) {
+            const ativo = link.getAttribute("href") === "#" + atual;
+            link.classList.toggle("active", ativo);
+
+            if (ativo) link.setAttribute("aria-current", "page");
+            else link.removeAttribute("aria-current");
+        });
+    }
+
+    window.addEventListener("scroll", function () {
+        if (!aguardando) {
+            aguardando = true;
+            requestAnimationFrame(aoRolar);
+        }
+    }, { passive: true });
+
+    window.addEventListener("resize", aoRolar);
+
+    botaoTopo.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: menosAnimacao ? "auto" : "smooth" });
+    });
+
+    aoRolar();
+
+
+    // ===================================
+    // 6. GALERIA EM TELA CHEIA (LIGHTBOX)
+    // ===================================
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxFechar = document.getElementById("lightboxFechar");
+
+    function abrirFoto(figura) {
+        const img = figura.querySelector("img");
+
+        // Se a foto não existe (img removida), não abre nada
+        if (!img) return;
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add("aberto");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        lightboxFechar.focus();
+    }
+
+    function fecharFoto() {
+        lightbox.classList.remove("aberto");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".foto").forEach(function (figura) {
+        figura.addEventListener("click", function () { abrirFoto(figura); });
+
+        figura.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                abrirFoto(figura);
+            }
+        });
+    });
+
+    // Fecha clicando no botão ou fora da foto
+    lightboxFechar.addEventListener("click", fecharFoto);
+
+    lightbox.addEventListener("click", function (e) {
+        if (e.target === lightbox) fecharFoto();
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") fecharFoto();
+    });
+</script>
+
+</body>
+</html>
